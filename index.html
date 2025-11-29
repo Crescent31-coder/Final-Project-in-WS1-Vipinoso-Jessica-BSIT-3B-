@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Official Barangay Website</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Base Styling & Variables */
+        :root {
+            --bg-primary: #f4f4f9;
+            --bg-secondary: #ffffff;
+            --text-color: #333;
+            --header-bg: #004d40;
+            --accent-color: #00796b;
+            --shadow-light: rgba(0, 0, 0, 0.05);
+            --shadow-medium: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dark Mode Variables */
+        .dark-mode {
+            --bg-primary: #1a202c;
+            --bg-secondary: #2d3748;
+            --text-color: #e2e8f0;
+            --header-bg: #0a111a;
+            --accent-color: #48bb78;
+            --shadow-light: rgba(255, 255, 255, 0.05);
+            --shadow-medium: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background-color: var(--bg-primary);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Custom Component Styling */
+        .site-header {
+            background-color: var(--header-bg);
+            color: white;
+            text-align: center;
+            box-shadow: 0 4px 6px var(--shadow-medium);
+        }
+
+        .header-image {
+            width: 10vh;
+            height: 10%;
+            object-fit: cover;
+           
+        }
+
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .sidebar {
+            min-width: 250px;
+            padding: 20px;
+            background-color: var(--bg-secondary);
+            border-radius: 8px;
+            box-shadow: 0 0 10px var(--shadow-light);
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 10px 15px;
+            margin-bottom: 5px;
+            text-decoration: none;
+            color: var(--text-color);
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--bg-primary);
+        }
+
+        .sidebar a.active {
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: bold;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding-left: 40px;
+        }
+
+        .page-section {
+            background-color: var(--bg-secondary);
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px var(--shadow-light);
+        }
+
+        .page-section h2 {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--bg-primary);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .announcement-box {
+            border: 1px solid var(--bg-primary);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid var(--accent-color);
+            border-radius: 4px;
+            background-color: var(--bg-secondary);
+            box-shadow: 0 1px 3px var(--shadow-light);
+        }
+
+        .announcement-box.emergency {
+            border-left: 5px solid #ef4444; /* Red for emergency */
+            background-color: var(--bg-primary);
+            color: #ef4444;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 10px;
+            }
+            .sidebar {
+                width: 100%;
+                position: relative;
+                margin-bottom: 20px;
+            }
+            .main-content {
+                padding-left: 0;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="site-header">
+        <img src="logo.jpg" alt="Barangay Header Image" class="header-image">
+        <h1 class="py-4 text-2xl font-bold">Barangay Resilient Portal</h1>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <!-- Utility Widgets -->
+            <div class="mb-4 p-3 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-inner">
+                <p class="text-sm font-semibold text-gray-600 dark:text-gray-400">Current Local Time</p>
+                <p id="live-clock" class="text-xl font-mono font-bold text-gray-800 dark:text-white mt-1">Loading...</p>
+            </div>
+
+            <!-- Dark Mode Toggle -->
+            <button id="theme-toggle" class="w-full p-2 mb-4 text-sm font-semibold rounded-lg transition duration-150 ease-in-out bg-gray-200 hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-800 dark:text-white">
+                ☀️ Toggle Dark Mode 🌙
+            </button>
+            <hr class="my-4">
+
+            <!-- Navigation Links -->
+            <a href="#home" class="nav-link active">🏠 Home/Announcements</a>
+            <a href="#officials" class="nav-link">🧑‍💼 Officials/Contact</a>
+            <a href="#services" class="nav-link">📄 Services</a>
+            <a href="#transparency" class="nav-link">🏛️ Transparency</a>
+            <a href="#portfolio" class="nav-link">🖼️ Portfolio/Gallery</a>
+            <a href="#about" class="nav-link">💡 About Us</a>
+            <a href="#contact" class="nav-link">📞 Contact Us</a>
+            
+            <hr class="my-4">
+            <a href="registration.html" class="nav-link text-white font-bold text-center bg-blue-600 hover:bg-blue-700 transition">📝 Resident Registration</a>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- HOME/ANNOUNCEMENTS Section -->
+            <section id="home" class="page-section">
+                <h2>📣 Latest News & Advisories</h2>
+                
+                <!-- Announcement Filter Input -->
+                <div class="mb-5">
+                    <input type="text" id="announcement-filter" placeholder="Search announcements (e.g., 'curfew', 'water', 'vaccine')..." class="w-full p-3 border rounded-lg shadow-sm focus:ring-accent-color focus:border-accent-color transition duration-150 bg-gray-100 dark:bg-gray-700 dark:text-white">
+                </div>
+
+                <div id="announcements-list">
+                    <!-- Announcement 1 -->
+                    <div class="announcement-box" data-keywords="advisory, water, interruption, schedule">
+                        <h3 class="font-semibold text-lg mb-1">Water Interruption Schedule Advisory</h3>
+                        <p class="text-sm italic mb-2">Posted: 2025-11-28</p>
+                        <p>Due to emergency line repairs, water service will be temporarily interrupted from 9:00 AM to 4:00 PM tomorrow in Purok 3 and 4. Please store sufficient water. We apologize for the inconvenience.</p>
+                    </div>
+
+                    <!-- Announcement 2 -->
+                    <div class="announcement-box emergency" data-keywords="emergency, disaster, hotline, flooding">
+                        <h3 class="font-bold text-lg mb-1">🚨 Emergency: Flooding Alert for Low-Lying Areas</h3>
+                        <p class="text-sm italic mb-2">Posted: 2025-11-29</p>
+                        <p>Residents in Zone 1 are advised to prepare for voluntary evacuation due to heavy rainfall and potential flooding. Contact the Barangay Hotline immediately: (046) 123-4567.</p>
+                    </div>
+
+                    <!-- Announcement 3 -->
+                    <div class="announcement-box" data-keywords="vaccination, health, schedule, clinic">
+                        <h3 class="font-semibold text-lg mb-1">Community Health & Vaccination Drive</h3>
+                        <p class="text-sm italic mb-2">Posted: 2025-11-25</p>
+                        <p>A free vaccination drive for flu shots and booster doses will be held at the Barangay Hall covered court this Saturday, 8:00 AM - 12:00 PM. Please bring a valid ID.</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 announcement-box emergency">
+                    <h3 class="font-bold text-lg mb-1">📞 Emergency Contact Numbers</h3>
+                    <ul class="list-disc pl-5">
+                        <li>Barangay Hotline: (046) 123-4567</li>
+                        <li>Police: 117</li>
+                        <li>Fire/Medical: 911</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- OFFICIALS/CONTACT Section -->
+            <section id="officials" class="page-section hidden">
+                <h2>🧑‍💼 Barangay Council Officials</h2>
+                <table class="w-full text-left border-collapse mt-4">
+                    <thead>
+                        <tr class="bg-gray-100 dark:bg-gray-700"><th>Position</th><th>Name</th><th>Contact (Cell/Email)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Punong Barangay (Captain)</td><td>Hon. Maria S. Dela Cruz</td><td>0917-123-4567</td></tr>
+                        <tr><td>Barangay Kagawad (Councilor)</td><td>Hon. Ricardo Gomez</td><td>0917-222-3333</td></tr>
+                        <tr><td>Barangay Secretary</td><td>Ms. Clara Reyes</td><td>clarareyes@brgy.gov.ph</td></tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <!-- SERVICES Section -->
+            <section id="services" class="page-section hidden">
+                <h2>📄 Barangay Services</h2>
+                <h3 class="font-semibold text-xl mt-4">How to Get a Barangay Clearance</h3>
+                <ol class="list-decimal pl-5 ml-4 space-y-2">
+                    <li>Present a valid ID and proof of residency.</li>
+                    <li>Pay the required fee at the Barangay Hall treasury.</li>
+                    <li>Wait for verification and issuance (usually takes 5-10 minutes).</li>
+                </ol>
+                
+                <h3 class="font-semibold text-xl mt-6">Indigency Certificate</h3>
+                <p>Required for: Scholarship applications, hospital assistance, etc.</p>
+                <p class="italic text-sm">Requirements: Application letter, proof of no stable income, and valid ID.</p>
+            </section>
+            
+            <!-- TRANSPARENCY Section -->
+            <section id="transparency" class="page-section hidden">
+                <h2>🏛️ Transparency and Governance</h2>
+                <p>View our official documents and financial reports below:</p>
+                <div class="my-4 p-4 border rounded-lg bg-gray-50 dark:bg-gray-800">
+                    <!-- Placeholder for embedded Google Doc (replace with actual share link) -->
+                    <div class="h-96 w-full flex items-center justify-center text-center text-gray-500 dark:text-gray-400 border-dashed border-2 border-gray-300 rounded-lg">
+                        Embedded Google Docs Placeholder: Budget Report FY 2025
+                    </div>
+                    <p class="text-center text-xs mt-2 text-gray-600 dark:text-gray-300">Barangay Annual Budget Report FY 2025</p>
+                </div>
+            </section>
+
+            <!-- PORTFOLIO/GALLERY Section -->
+            <section id="portfolio" class="page-section hidden">
+                <h2>🖼️ Community Photo Gallery</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+                    <img class="w-full h-40 object-cover rounded-lg shadow-md" src="https://placehold.co/300x200/00796b/ffffff?text=Community+Event+1" alt="Community Event 1">
+                    <img class="w-full h-40 object-cover rounded-lg shadow-md" src="https://placehold.co/300x200/004d40/ffffff?text=Infrastructure+Project" alt="Infrastructure Project">
+                    <img class="w-full h-40 object-cover rounded-lg shadow-md" src="https://placehold.co/300x200/00796b/ffffff?text=Barangay+Hall" alt="Barangay Hall">
+                </div>
+            </section>
+            
+            <!-- ABOUT US Section -->
+            <section id="about" class="page-section hidden">
+                <h2>💡 About Our Barangay</h2>
+                <p>Established in 1950, our barangay is committed to providing a safe, clean, and progressive community for all its residents.
+                <h3 class="font-semibold text-xl mt-4">Mission</h3>
+                <p>To uphold transparency and provide efficient public service.</p>
+                <h3 class="font-semibold text-xl mt-4">Vision</h3>
+                <p>A thriving, self-reliant community where everyone has access to basic services and opportunities.</p>
+            </section>
+
+             <!-- CONTACT US Section -->
+            <section id="contact" class="page-section hidden">
+                <h2>📞 Contact Us</h2>
+                <p>For non-emergency concerns, you may visit the Barangay Hall during office hours or send us an email.</p>
+                <ul class="list-disc pl-5 ml-4 space-y-1 mt-3">
+                    <li>Address: Real St., Burabod Lagonoy, Camarines Sur, Philippines</li>
+                    <li>Office Hours: Monday - Friday, 8:00 AM to 5:00 PM</li>
+                    <li>Email: official@brgyburabod.gov.ph</li>
+                </ul>
+            </section>
+
+        </main>
+    </div>
+
+    <footer class="text-center py-4 mt-8 bg-gray-800 text-white">
+        <p>&copy; 2025 Official Barangay Website. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- 1. Basic Single-Page Navigation (Show/Hide Sections) ---
+            const navLinks = document.querySelectorAll('.sidebar a.nav-link');
+            const sections = document.querySelectorAll('.page-section');
+            const defaultSectionId = '#home';
+
+            function navigate(targetHash) {
+                // Ensure the hash is a section ID starting with #
+                if (!targetHash.startsWith('#')) return;
+
+                sections.forEach(section => {
+                    section.classList.add('hidden');
+                });
+
+                const targetSection = document.querySelector(targetHash);
+                if (targetSection) {
+                    targetSection.classList.remove('hidden');
+                }
+
+                navLinks.forEach(nav => {
+                    nav.classList.remove('active');
+                    if (nav.getAttribute('href') === targetHash) {
+                        nav.classList.add('active');
+                    }
+                });
+
+                // Update URL hash without page reload
+                history.pushState(null, null, targetHash);
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Prevent default only for internal hash links, not external links like registration.html
+                    if (this.hash && this.hash.startsWith('#')) {
+                        e.preventDefault();
+                        navigate(this.hash);
+                    }
+                });
+            });
+
+            // Handle initial load based on URL hash or default to home
+            const initialHash = window.location.hash || defaultSectionId;
+            navigate(initialHash);
+
+            // --- 2. Live Date and Time Display ---
+            const clockElement = document.getElementById('live-clock');
+
+            function updateClock() {
+                const now = new Date();
+                const options = { 
+                    weekday: 'short', 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric', 
+                    hour: '2-digit', 
+                    minute: '2-digit', 
+                    second: '2-digit', 
+                    hour12: true 
+                };
+                const timeString = now.toLocaleTimeString('en-US', options);
+                clockElement.textContent = timeString;
+            }
+
+            updateClock();
+            setInterval(updateClock, 1000); // Update every second
+
+            // --- 3. Dark Mode Toggle (Necessary Usability Feature) ---
+            const themeToggle = document.getElementById('theme-toggle');
+            const storageKey = 'barangay-dark-mode';
+
+            // Check local storage for preferred theme
+            const isDarkMode = localStorage.getItem(storageKey) === 'true';
+
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+            }
+
+            themeToggle.addEventListener('click', () => {
+                const isCurrentlyDark = document.body.classList.toggle('dark-mode');
+                
+                // Save preference to local storage
+                localStorage.setItem(storageKey, isCurrentlyDark);
+                
+                // Update button text (optional, but good UX)
+                themeToggle.textContent = isCurrentlyDark ? '☀️ Toggle Light Mode 🌙' : '🌙 Toggle Dark Mode ☀️';
+            });
+            
+            // Set initial button text
+            themeToggle.textContent = isDarkMode ? '☀️ Toggle Light Mode 🌙' : '🌙 Toggle Dark Mode ☀️';
+
+
+            // --- 4. Announcement Search Filter (Necessary for Quick Information Retrieval) ---
+            const filterInput = document.getElementById('announcement-filter');
+            const announcementsList = document.getElementById('announcements-list');
+            const announcementBoxes = announcementsList.getElementsByClassName('announcement-box');
+
+            filterInput.addEventListener('keyup', function() {
+                const filterValue = filterInput.value.toLowerCase().trim();
+
+                for (let i = 0; i < announcementBoxes.length; i++) {
+                    const box = announcementBoxes[i];
+                    // Search in visible text content and custom data-keywords attribute
+                    const textContent = box.textContent.toLowerCase();
+                    const keywords = box.getAttribute('data-keywords').toLowerCase();
+                    
+                    if (textContent.includes(filterValue) || keywords.includes(filterValue)) {
+                        box.style.display = 'block';
+                    } else {
+                        box.style.display = 'none';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
